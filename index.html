@@ -1375,7 +1375,7 @@ let currentTrack = 0;
 const UNLOCK_KEY = '1';
 
 function isUnlocked() {
-  return localStorage.getItem(UNLOCK_KEY) === '1';
+  return localStorage.getItem(UNLOCK_KEY) === '0';
 }
 
 function unlock() {
@@ -1453,6 +1453,10 @@ document.addEventListener('click', function(e) {
   }
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    unlock();
+});
+  
 </script>
 </body>
 </html>
