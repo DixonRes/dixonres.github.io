@@ -255,7 +255,7 @@ tr:nth-child(even) td { background: #fafafa; }
 
 /* ── MUSIC BUTTON HOVER REVEAL ── */
 .music-select-btn {
-  display: inline-block;
+  display: none;
   background: none;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -263,16 +263,8 @@ tr:nth-child(even) td { background: #fafafa; }
   font-size: 13px;
   color: #555;
   cursor: pointer;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s, background 0.15s;
+  transition: background 0.15s;
   white-space: nowrap;
-}
-.nav-right:hover .music-select-btn,
-.music-menu[style*="display: block"] + .music-select-btn,
-#music-wrapper:hover .music-select-btn {
-  opacity: 1;
-  pointer-events: auto;
 }
 .music-select-btn:hover { background: #f5f5f5; color: #111; }
 
@@ -551,18 +543,13 @@ footer {
       <button class="copy-btn" onclick="copyPre(this)">copy</button>
       <pre>./drsolve --comp <span class="str">"polynomials"</span> <span class="str">"eliminate_vars"</span> field_size
 ./drsolve -c     <span class="str">"polynomials"</span> <span class="str">"eliminate_vars"</span> field_size
-./drsolve -r -c  <span class="str">"[d]*n"</span> field_size
-./drsolve -c -r  <span class="str">"[d]*n"</span> field_size</pre>
+./drsolve -r -c  <span class="str">"[d]*n"</span> field_size</pre>
     </div>
 
     <p><strong>Example</strong></p>
     <div class="code-block">
       <button class="copy-btn" onclick="copyPre(this)">copy</button>
       <pre>./drsolve --comp <span class="str">"x^3+y^3+z^3, x^2*y+y^2*z+z^2*x, x+y+z-1"</span> <span class="str">"x,y"</span> <span class="num">257</span></pre>
-    </div>
-    <div class="code-block">
-      <button class="copy-btn" onclick="copyPre(this)">copy</button>
-      <pre>./drsolve -c -r <span class="str">"[4]*4"</span> <span class="num">257</span></pre>
     </div>
 
     <p><strong>Sample console output</strong></p>
@@ -1452,7 +1439,40 @@ const TRACKS = [
 ];
 let currentTrack = 0;
 
+const UNLOCK_KEY = 'drsolve_music_unlocked';
+let logoClickCount = 0;
+let logoClickTimer = null;
+
+function isUnlocked() {
+  return localStorage.getItem(UNLOCK_KEY) === '1';
+}
+
+function unlock() {
+  localStorage.setItem(UNLOCK_KEY, '1');
+  document.getElementById('music-select-btn').style.display = 'inline-block';
+  updateIndicators(true);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  if (isUnlocked()) {
+    document.getElementById('music-select-btn').style.display = 'inline-block';
+    updateIndicators(true);
+  }
+});
+
+function secretUnlockMusic() {
+  if (isUnlocked()) return;
+  logoClickCount += 1;
+  clearTimeout(logoClickTimer);
+  logoClickTimer = setTimeout(() => { logoClickCount = 0; }, 1800);
+  if (logoClickCount >= 5) {
+    unlock();
+    logoClickCount = 0;
+  }
+}
+
 function toggleMusicMenu() {
+  if (!isUnlocked()) return;
   const menu = document.getElementById('music-menu');
   menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
 }
@@ -1498,6 +1518,8 @@ document.addEventListener('click', function(e) {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+  const logo = document.querySelector('.nav-logo');
+  if (logo) logo.addEventListener('click', secretUnlockMusic);
   const audio = document.getElementById('dixon-audio');
   if (audio) {
     audio.addEventListener('play', () => updateIndicators(false));
