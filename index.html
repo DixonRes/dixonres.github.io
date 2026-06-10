@@ -263,8 +263,8 @@ tr:nth-child(even) td { background: #fafafa; }
   font-size: 13px;
   color: #555;
   cursor: pointer;
-  opacity: 0;
-  pointer-events: none;
+  opacity: 0.1;
+  pointer-events: none; 
   transition: opacity 0.2s, background 0.15s;
   white-space: nowrap;
 }
@@ -285,7 +285,7 @@ tr:nth-child(even) td { background: #fafafa; }
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.10);
-  min-width: 220px;
+  min-width: 200px;
   z-index: 100;
   overflow: hidden;
 }
@@ -374,7 +374,7 @@ footer {
   .nav-tabs button { padding: 12px 10px; font-size: 13px; }
   .repo-card { flex-direction: column; }
   h1 { font-size: 22px; }
-  .music-menu { min-width: 220px; right: -8px; }
+  .music-menu { min-width: 200px; right: -8px; }
 }
 </style>
 </head>
@@ -404,9 +404,9 @@ footer {
             </div>
             <div class="music-item" onclick="selectTrack(0)"><span id="indicator-0" style="color:#111;font-size:11px;">▶</span> Beach</div>
             <div class="music-item" onclick="selectTrack(1)"><span id="indicator-1" style="color:#111;font-size:11px;">▶</span> Cloud</div>
-            <div class="music-item" onclick="selectTrack(2)"><span id="indicator-2" style="color:#111;font-size:11px;">▶</span> Dance</div>
             <div class="music-item" onclick="selectTrack(3)"><span id="indicator-3" style="color:#111;font-size:11px;">▶</span> Moon</div>
             <div class="music-item" onclick="selectTrack(4)"><span id="indicator-4" style="color:#111;font-size:11px;">▶</span> Wind</div>
+            <div class="music-item" onclick="selectTrack(2)"><span id="indicator-2" style="color:#111;font-size:11px;">▶</span> Dance</div>
             <div class="music-menu-head">
               <button class="music-group-play" onclick="playGroup(event, 'song')" title="Loop Song">▶</button>
               <span>Crypto Song</span> 
@@ -1462,9 +1462,9 @@ function copyPre(btn) {
 const TRACKS = [
   { file: 'Piano&Violin/Beach.mp3', label: 'Beach', category: 'Piano&Violin' },
   { file: 'Piano&Violin/Cloud.mp3', label: 'Cloud', category: 'Piano&Violin' },
-  { file: 'Piano&Violin/Dance.mp3', label: 'Dance', category: 'Piano&Violin' },
   { file: 'Piano&Violin/Moon.mp3', label: 'Moon', category: 'Piano&Violin' },
   { file: 'Piano&Violin/Wind.mp3', label: 'Wind', category: 'Piano&Violin' },
+  { file: 'Piano&Violin/Dance.mp3', label: 'Dance', category: 'Piano&Violin' },
   { file: 'Song/DixonSong.mp3', label: 'Dixon Song', category: 'Song' },
   { file: 'Song/CryptoStar.mp3', label: 'Crypto Star', category: 'Song' },
   { file: 'Song/ProveDream.mp3', label: 'Prove Dream', category: 'Song' },
