@@ -295,7 +295,7 @@ tr:nth-child(even) td { background: #fafafa; }
 }
 
 .music-menu-head {
-  padding: 10px 16px 8px;
+  padding: 10px 10.5px 8px;
   font-size: 12px;
   font-weight: 700;
   color: #666;
@@ -303,6 +303,30 @@ tr:nth-child(even) td { background: #fafafa; }
   text-transform: uppercase;
   background: #fafafa;
   border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.music-group-play {
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #555;
+  border-radius: 999px;
+  width: 22px;
+  height: 22px;
+  font-size: 11px;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.music-group-play:hover {
+  background: #f5f5f5;
+  color: #111;
 }
 
 .music-item {
@@ -374,13 +398,19 @@ footer {
       <div id="music-menu" class="music-menu">
         <div class="music-menu-grid">
           <div class="music-menu-col">
-            <div class="music-menu-head">Piano&amp;Violin</div>
+            <div class="music-menu-head">
+              <button class="music-group-play" onclick="playGroup(event, 'piano')" title="Loop Piano&Violin">▶</button>
+              <span>Piano&amp;Violin</span>
+            </div>
             <div class="music-item" onclick="selectTrack(0)"><span id="indicator-0" style="color:#111;font-size:11px;">▶</span> Beach</div>
             <div class="music-item" onclick="selectTrack(1)"><span id="indicator-1" style="color:#111;font-size:11px;">▶</span> Cloud</div>
             <div class="music-item" onclick="selectTrack(2)"><span id="indicator-2" style="color:#111;font-size:11px;">▶</span> Dance</div>
             <div class="music-item" onclick="selectTrack(3)"><span id="indicator-3" style="color:#111;font-size:11px;">▶</span> Moon</div>
             <div class="music-item" onclick="selectTrack(4)"><span id="indicator-4" style="color:#111;font-size:11px;">▶</span> Wind</div>
-            <div class="music-menu-head">Song</div>
+            <div class="music-menu-head">
+              <button class="music-group-play" onclick="playGroup(event, 'song')" title="Loop Song">▶</button>
+              <span>Song</span> 
+            </div>
             <div class="music-item" onclick="selectTrack(5)"><span id="indicator-5" style="color:#111;font-size:11px;">▶</span> Dixon Song</div>
             <div class="music-item" onclick="selectTrack(6)"><span id="indicator-6" style="color:#111;font-size:11px;">▶</span> Crypto Star</div>
             <div class="music-item" onclick="selectTrack(7)"><span id="indicator-7" style="color:#111;font-size:11px;">▶</span> Prove Dream</div>
@@ -1442,15 +1472,20 @@ const TRACKS = [
   { file: 'Song/One-WayHash.mp3', label: 'One-Way Hash', category: 'Song' },
 ];
 let currentTrack = 0;
+let currentGroup = null;
+const GROUPS = {
+  piano: [0, 1, 2, 3, 4],
+  song: [5, 6, 7, 8, 9],
+};
 
 function toggleMusicMenu() {
   const menu = document.getElementById('music-menu');
   menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
 }
 
-function selectTrack(idx) {
+function playTrack(idx, keepMenuOpen) {
   const audio = document.getElementById('dixon-audio');
-  document.getElementById('music-menu').style.display = 'none';
+  if (!keepMenuOpen) document.getElementById('music-menu').style.display = 'none';
 
   if (idx === currentTrack) {
     if (audio.paused) { audio.play(); } else { audio.pause(); }
@@ -1462,7 +1497,28 @@ function selectTrack(idx) {
   audio.src = TRACKS[idx].file;
   audio.play();
   updateIndicators();
-  audio.onended = () => { updateIndicators(true); };
+}
+
+function selectTrack(idx) {
+  currentGroup = null;
+  playTrack(idx, false);
+}
+
+function playGroup(event, groupName) {
+  event.stopPropagation();
+  const group = GROUPS[groupName];
+  if (!group || !group.length) return;
+  currentGroup = groupName;
+  playTrack(group[0], true);
+}
+
+function advanceGroup() {
+  if (!currentGroup) return false;
+  const group = GROUPS[currentGroup];
+  const idx = group.indexOf(currentTrack);
+  const nextTrack = group[(idx + 1) % group.length];
+  playTrack(nextTrack, true);
+  return true;
 }
 
 function updateIndicators(ended) {
@@ -1493,7 +1549,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (audio) {
     audio.addEventListener('play', () => updateIndicators(false));
     audio.addEventListener('pause', () => updateIndicators(false));
-    audio.addEventListener('ended', () => updateIndicators(true));
+    audio.addEventListener('ended', () => {
+      if (!advanceGroup()) updateIndicators(true);
+    });
   }
 });
   
