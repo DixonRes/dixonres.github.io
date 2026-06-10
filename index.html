@@ -285,18 +285,13 @@ tr:nth-child(even) td { background: #fafafa; }
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.10);
-  min-width: 360px;
+  min-width: 220px;
   z-index: 100;
   overflow: hidden;
 }
 
 .music-menu-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.music-menu-col + .music-menu-col {
-  border-left: 1px solid #eee;
+  display: block;
 }
 
 .music-menu-head {
@@ -355,9 +350,7 @@ footer {
   .nav-tabs button { padding: 12px 10px; font-size: 13px; }
   .repo-card { flex-direction: column; }
   h1 { font-size: 22px; }
-  .music-menu { min-width: 300px; right: -8px; }
-  .music-menu-grid { grid-template-columns: 1fr; }
-  .music-menu-col + .music-menu-col { border-left: none; border-top: 1px solid #eee; }
+  .music-menu { min-width: 220px; right: -8px; }
 }
 </style>
 </head>
@@ -387,8 +380,6 @@ footer {
             <div class="music-item" onclick="selectTrack(2)"><span id="indicator-2" style="color:#111;font-size:11px;">▶</span> Dance</div>
             <div class="music-item" onclick="selectTrack(3)"><span id="indicator-3" style="color:#111;font-size:11px;">▶</span> Moon</div>
             <div class="music-item" onclick="selectTrack(4)"><span id="indicator-4" style="color:#111;font-size:11px;">▶</span> Wind</div>
-          </div>
-          <div class="music-menu-col">
             <div class="music-menu-head">Song</div>
             <div class="music-item" onclick="selectTrack(5)"><span id="indicator-5" style="color:#111;font-size:11px;">▶</span> Dixon Song</div>
             <div class="music-item" onclick="selectTrack(6)"><span id="indicator-6" style="color:#111;font-size:11px;">▶</span> Crypto Star</div>
