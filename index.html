@@ -402,10 +402,10 @@ footer {
               <button class="music-group-play" onclick="playGroup(event, 'piano')" title="Loop Piano&Violin">▶</button>
               <span>Piano&amp;Violin</span>
             </div>
-            <div class="music-item" onclick="selectTrack(0)"><span id="indicator-0" style="color:#111;font-size:11px;">▶</span> Beach</div>
+            <div class="music-item" onclick="selectTrack(0)"><span id="indicator-0" style="color:#111;font-size:11px;">▶</span> Moon</div>
             <div class="music-item" onclick="selectTrack(1)"><span id="indicator-1" style="color:#111;font-size:11px;">▶</span> Cloud</div>
-            <div class="music-item" onclick="selectTrack(2)"><span id="indicator-2" style="color:#111;font-size:11px;">▶</span> Moon</div>
-            <div class="music-item" onclick="selectTrack(3)"><span id="indicator-3" style="color:#111;font-size:11px;">▶</span> Wind</div>
+            <div class="music-item" onclick="selectTrack(2)"><span id="indicator-2" style="color:#111;font-size:11px;">▶</span> Wind</div>
+            <div class="music-item" onclick="selectTrack(3)"><span id="indicator-3" style="color:#111;font-size:11px;">▶</span> Beach</div>
             <div class="music-item" onclick="selectTrack(4)"><span id="indicator-4" style="color:#111;font-size:11px;">▶</span> Dance</div>
             <div class="music-menu-head">
               <button class="music-group-play" onclick="playGroup(event, 'song')" title="Loop Song">▶</button>
@@ -1074,7 +1074,7 @@ make help</pre>
       <span style="font-size:13px;color:#888;font-family:monospace;">2026-06-05</span>
     </div>
     <ul style="list-style:none;font-size:14px;color:#333;margin-bottom:20px;display:flex;flex-direction:column;gap:6px;">
-      <li>- Optimize the HNF algorithm by using the residual sequence, significantly accelerating Step 4.</li>
+      <li>- Optimize the HNF algorithm by switching mbasis to residual-sequence updates, significantly accelerating Step 4.</li>
     </ul>
     <div style="display:flex;gap:10px;flex-wrap:wrap;">
       <a class="btn" href="https://github.com/drsolve/drsolve/archive/refs/tags/v0.3.1.tar.gz"> Source code (.tar.gz)</a>
@@ -1460,10 +1460,10 @@ function copyPre(btn) {
 }
   
 const TRACKS = [
-  { file: 'Piano&Violin/Beach.mp3', label: 'Beach', category: 'Piano&Violin' },
-  { file: 'Piano&Violin/Cloud.mp3', label: 'Cloud', category: 'Piano&Violin' },
   { file: 'Piano&Violin/Moon.mp3', label: 'Moon', category: 'Piano&Violin' },
+  { file: 'Piano&Violin/Cloud.mp3', label: 'Cloud', category: 'Piano&Violin' },
   { file: 'Piano&Violin/Wind.mp3', label: 'Wind', category: 'Piano&Violin' },
+  { file: 'Piano&Violin/Beach.mp3', label: 'Beach', category: 'Piano&Violin' },
   { file: 'Piano&Violin/Dance.mp3', label: 'Dance', category: 'Piano&Violin' },
   { file: 'Song/DixonSong.mp3', label: 'Dixon Song', category: 'Song' },
   { file: 'Song/CryptoStar.mp3', label: 'Crypto Star', category: 'Song' },
