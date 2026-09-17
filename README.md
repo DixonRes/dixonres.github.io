@@ -1,6 +1,4 @@
-## Music Notes
-
-Congratulations on finding the Easter egg. After unlocking the hidden music menu on the site, you can listen to:
+## Music
 
 - **Piano&Violin**
 - Beach — [Download](https://github.com/drsolve/drsolve.github.io/blob/main/Piano%26Violin/Beach.mp3)
