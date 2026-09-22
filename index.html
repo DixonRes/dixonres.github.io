@@ -419,7 +419,7 @@ footer {
           </div>
         </div>
         <div class="music-menu-footer">
-          <a href="https://github.com/drsolve/drsolve.github.io" target="_blank">⬇ Download</a>
+          <a href="#" onclick="showPage('downloads');return false;">⬇ Download</a>
         </div>
       </div>
     </div>
@@ -440,14 +440,14 @@ footer {
   </div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:-5px;">
   <span style="background:#eee;color:#111;border:1px solid #d1d5db;padding:10px 10px;border-radius:6px;font-weight:bold;font-size:14px;margin-right:4px;">
-    <a href="#" onclick="showPage('downloads');return false;" style="text-decoration:none; color:inherit; display:inline-block;">Download v0.5.1</a>
+    <a href="#" onclick="showPage('downloads');return false;" style="text-decoration:none; color:inherit; display:inline-block;">Download v0.5.2</a>
   </span>
   <span style="width:1px;height:30px;background:#ddd;display:inline-block;margin:0 2px;"></span>
 
-  <a class="btn" href="https://github.com/drsolve/drsolve/archive/refs/tags/v0.5.1.tar.gz" style="background:#333;color:#fff;border:1px solid #333;">Source Code</a>
-  <a class="btn btn-outline" href="https://github.com/drsolve/drsolve/releases/download/v0.5.1/drsolve-0.5.1-linux-x86_64.zip">Linux Binary</a>
-  <a class="btn btn-outline" href="https://github.com/drsolve/drsolve/releases/download/v0.5.1/drsolve-0.5.1-macos26.5-arm64.zip">macOS Binary</a>
-  <a class="btn btn-outline" href="https://github.com/drsolve/drsolve/releases/download/v0.5.1/drsolve-0.5.1-windows-x86_64.zip">Windows GUI</a>
+  <a class="btn" href="https://github.com/drsolve/drsolve/archive/refs/tags/v0.5.2.tar.gz" style="background:#333;color:#fff;border:1px solid #333;">Source Code</a>
+  <a class="btn btn-outline" href="https://github.com/drsolve/drsolve/releases/download/v0.5.2/drsolve-0.5.2-linux-x86_64.zip">Linux Binary</a>
+  <a class="btn btn-outline" href="https://github.com/drsolve/drsolve/releases/download/v0.5.2/drsolve-0.5.2-macos26.5-arm64.zip">macOS Binary</a>
+  <a class="btn btn-outline" href="https://github.com/drsolve/drsolve/releases/download/v0.5.2/drsolve-0.5.2-windows-x86_64.zip">Windows GUI</a>
     </div>
 </div>
 
@@ -653,9 +653,9 @@ Overall complexity = max(step1/2, step4) (log2): ...
 ./drsolve -s <span class="str">"..."</span> <span class="num">65537</span>
 ./drsolve -s <span class="str">"..."</span> <span class="num">4294967311</span></pre>
     </div>
-    <p>When the optional <a href="https://github.com/vneiger/pml" target="_blank">PML library</a> is installed and detected at configure time, polynomial matrix operations are automatically accelerated for well-determined prime field systems.</p>
+    <p>The bundled <a href="https://github.com/vneiger/pml" target="_blank">PML code</a> accelerates suitable polynomial matrix operations over prime fields.</p>
     <div class="info-box">For very large primes beyond the <code>nmod</code> limit, the current release still computes Dixon resultants by reconstructing over ℚ and then reducing modulo the target prime.</div>
-    <div class="note-box">For very large primes beyond the <code>nmod</code> limit, solver mode is available, but <code>--comp</code>, <code>--random</code>, <code>--ideal</code>, and <code>--field-equation</code> are not available yet.</div>
+    <div class="note-box">For very large primes beyond the <code>nmod</code> limit, solver and random modes are available; <code>--comp</code>, <code>--ideal</code>, and <code>--field-equation</code> are not available yet.</div>
 
     <h3>Extension fields — F<sub>p<sup>k</sup></sub></h3>
     <p>Specify an extension field as <code>p^k</code>. The generator is <code>t</code> by default, and FLINT's built-in irreducible polynomial is used unless a custom one is provided.</p>
@@ -721,7 +721,9 @@ Overall complexity = max(step1/2, step4) (log2): ...
 ./drsolve -r       <span class="str">"[d]*n"</span>          field_size
 ./drsolve -r -n <span class="num">4</span> --density <span class="num">0.5</span> <span class="str">"[d]*3"</span> field_size
 ./drsolve -r -s    <span class="str">"[d1,...,dn]"</span> field_size
-./drsolve -r --comp  <span class="str">"[d]*n"</span>        field_size</pre>
+./drsolve -r --comp  <span class="str">"[d]*n"</span>        field_size
+./drsolve -r --vardeg <span class="str">"[b1,b2,...,bn]"</span> field_size
+./drsolve -r --vardeg -m <span class="num">3</span> <span class="str">"[b1,b2]"</span> field_size</pre>
     </div>
     <p><strong>Examples</strong></p>
     <div class="code-block">
@@ -731,11 +733,12 @@ Overall complexity = max(step1/2, step4) (log2): ...
 ./drsolve -r -n <span class="num">4</span> --density <span class="num">0.5</span> <span class="str">"[3]*3"</span> <span class="num">257</span>
 ./drsolve -r --seed <span class="num">12345</span> <span class="str">"[3]*3"</span> <span class="num">257</span>
 ./drsolve -r -s <span class="str">"[2]*3"</span> <span class="num">257</span>
-./drsolve -r --comp --omega <span class="num">2.373</span> <span class="str">"[4]*4"</span> <span class="num">257</span></pre>
+./drsolve -r --comp --omega <span class="num">2.373</span> <span class="str">"[4]*4"</span> <span class="num">257</span>
+./drsolve -r --vardeg -m <span class="num">3</span> <span class="str">"[2,3]"</span> <span class="num">257</span></pre>
     </div>
     <div class="info-box">Random systems use auto-generated variable names such as <code>x0</code>, <code>x1</code>, … and write the same solution/complexity files as manual input.</div>
     <div class="info-box"><code>--seed &lt;num&gt;</code> makes random generation reproducible across runs. This is useful for benchmarks, bug reports, and paper examples.</div>
-    <div class="note-box">Random mode is not available in the current large-prime fallback mode.</div>
+    <div class="info-box"><code>--vardeg</code> treats the list as a maximum exponent for each variable. It generates one equation per variable by default; use <code>-m</code> or <code>--num-equations</code> to set the equation count. It cannot be combined with <code>-n</code> or <code>--homogeneous</code>.</div>
   </div>
 
   <!-- Extension fields -->
@@ -1002,7 +1005,7 @@ rat = DixonSolve(G, field_size=<span class="num">0</span>, rational_only=<span c
   <p class="subtitle">DRsolve is built on FLINT and ships with the PML code it uses. FLINT 3.6.0 is the recommended version.</p>
 
   <h2>1. Install FLINT</h2>
-  <p>Install FLINT first. The upstream repository is <a href="https://github.com/flintlib/flint" target="_blank">github.com/flintlib/flint</a>; the current recommended version is <code>3.5.0</code>.</p>
+  <p>Install FLINT first. The upstream repository is <a href="https://github.com/flintlib/flint" target="_blank">github.com/flintlib/flint</a>; the recommended version is <code>3.6.0</code>.</p>
   <div class="code-block">
     <button class="copy-btn" onclick="copyPre(this)">copy</button>
     <pre>git clone https://github.com/flintlib/flint.git
@@ -1049,7 +1052,7 @@ make help</pre>
   <table>
     <tr><th>Component</th><th>Required</th><th>Version</th><th>Link</th></tr>
     <tr>
-      <td>FLINT</td><td>Yes</td><td>recommended 3.5.0</td>
+      <td>FLINT</td><td>Yes</td><td>recommended 3.6.0</td>
       <td><a href="https://github.com/flintlib/flint" target="_blank">github.com/flintlib/flint</a></td>
     </tr>
     <tr>
@@ -1065,8 +1068,27 @@ make help</pre>
 <!-- ══ DOWNLOADS ══ -->
 <div id="page-downloads" class="page">
   <h1>Downloads</h1>
-  <p class="subtitle">Pre-built source archives for each <a href="https://github.com/drsolve/drsolve/releases" target="_blank" rel="noopener noreferrer">release</a>. 
+  <p class="subtitle">Source archives and binaries for each <a href="https://github.com/drsolve/drsolve/releases" target="_blank" rel="noopener noreferrer">release</a>. 
     Build instructions are on the <a href="#" onclick="showPage('install');return false;">Install</a> page.</p>
+  <!-- v0.5.2 -->
+  <div style="border:1px solid #ddd;border-radius:6px;padding:24px;margin-bottom:20px;">
+    <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:4px;flex-wrap:wrap;">
+      <h2 style="margin:0;">v0.5.2</h2>
+      <span style="font-size:13px;color:#888;font-family:monospace;">2026-09-22</span>
+    </div>
+    <ul style="list-style:none;font-size:14px;color:#333;margin-bottom:20px;display:flex;flex-direction:column;gap:6px;">
+      <li>- Improve Step 3 performance for MQ systems.</li>
+      <li>- Improve Step 4 performance for square systems over prime fields.</li>
+      <li>- Add <code>--vardeg</code> to generate random systems with per-variable exponent bounds.</li>
+    </ul>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <a class="btn" href="https://github.com/drsolve/drsolve/archive/refs/tags/v0.5.2.tar.gz"> Source code (.tar.gz)</a>
+      <a class="btn" href="https://github.com/drsolve/drsolve/archive/refs/tags/v0.5.2.zip"> Source code (.zip)</a>
+      <a class="btn btn-outline" href="https://github.com/drsolve/drsolve/releases/download/v0.5.2/drsolve-0.5.2-linux-x86_64.zip"> Binary (.zip, Linux x86_64)</a>
+      <a class="btn btn-outline" href="https://github.com/drsolve/drsolve/releases/download/v0.5.2/drsolve-0.5.2-macos26.5-arm64.zip"> Binary (.zip, MacOS arm64)</a>
+      <a class="btn btn-outline" href="https://github.com/drsolve/drsolve/releases/download/v0.5.2/drsolve-0.5.2-windows-x86_64.zip"> Binary (.zip, Windows x86_64)</a>
+    </div>
+  </div>
   <!-- v0.5.1 -->
   <div style="border:1px solid #ddd;border-radius:6px;padding:24px;margin-bottom:20px;">
     <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:4px;flex-wrap:wrap;">
