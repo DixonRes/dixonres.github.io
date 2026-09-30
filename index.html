@@ -1077,9 +1077,9 @@ make help</pre>
       <span style="font-size:13px;color:#888;font-family:monospace;">2026-09-30</span>
     </div>
     <ul style="list-style:none;font-size:14px;color:#333;margin-bottom:20px;display:flex;flex-direction:column;gap:6px;">
-      <li>- Optimize Step4 for MQ and equal-degree three-variable systems by reducing matrix size through verified Schur compression.</li>
-      <li>- Optimize Step1 for MQ systems by filtering unnecessary terms using degree constraints and reducing the Dixon matrix construction scope.</li>
-      <li>- Make recursive block construction the default for 3*3 systems, with native prime-field arithmetic accelerating matrix construction.</li>
+      <li>- Speed up Step4 for MQ with verified Schur compression.</li>
+      <li>- Speed up Step1 for MQ systems with degree-based term filtering and smaller Dixon matrices.</li>
+      <li>- Default to recursive block construction for three-variable systems, accelerated by prime-field arithmetic.</li>
     </ul>
     <div style="display:flex;gap:10px;flex-wrap:wrap;">
       <a class="btn" href="https://github.com/drsolve/drsolve/archive/refs/tags/v0.5.3.tar.gz"> Source code (.tar.gz)</a>
